@@ -1,6 +1,75 @@
 !!!
-%html{lang: "ja"}
+%html
   %head
-    %meta{charset: "utf-8"}
+    :css
+      .turbolinks-progress-bar {
+        position: fixed;
+        display: block;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: #0076ff;
+        z-index: 9999;
+        transition: width 300ms ease-out, opacity 150ms 150ms ease-in;
+        transform: translate3d(0, 0, 0);
+      }
+    %link{"data-turbolinks-track" => "reload", :href => "", :media => "all", :rel => "stylesheet"}/
+    %script{"data-turbolinks-track" => "reload", :src => ""}
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Chatspace
+    %meta{:content => "authenticity_token", :name => "csrf-param"}/
+    %meta{:content => "", :name => "csrf-token"}/
   %body
-    hello world
+    .flash-box
+    .wrapper
+      .chat-side
+        .side-header
+          .side-header__box
+            %p.side-header__box__user-name miwa
+            %ul.side-header__box__menu
+              %li.side-header__box__menu__edit-user
+                %a{:href => ""}
+                  %i.fa.fa-edit
+                    \::before
+              %li.side-header__box__menu__new-group
+                %a{:href => ""}
+                  %i.fa.fa-cog
+                    \::before
+        .groups
+          %a{:href => ""}
+            .group
+              %p.group__group-name 第一グループ
+              %p.group__latest-message グループメッセージ
+          %a{:href => ""}
+            .group
+              %p.group__group-name 第二グループ
+              %p.group__latest-message まだメッセージがありません
+      .chat-main
+        .main-header
+          .main-header__left-box
+            %h2.main-header__left-box__current-group{"data-group_id" => "12"}
+              グループ
+            %ul.main-header__left-box__member-list
+              "
+              Member
+              "
+              %li.main-header__left-box__member-list__member 三輪
+          %a{:href => ""}
+            .main-header__edit-btn Edit
+        .messages
+          .message{"data-message_id" => ""}
+            .message__upper-info
+              %p.message__upper-info__talker メッセージ主
+              %p.message__upper-info__data 2019/02/09(sat) 15:33:32
+            %p.message__text メッセージテキスト
+        .form
+          %form#new_message.new_message{"accept-charset" => "UTF-8", :action => "/groups/12/messages", :enctype => "multipart/form-data", :method => "post"}
+            %input{:name => "utf8", :type => "hidden", :value => "✔"}/
+            %input{:name => "authenticity_token", :type => "hidden", :value => ""}/
+            .input-box
+              %input#message_content.input-box__text{:name => "message[content]", :placeholder => "type a message", :type => "text"}/
+              %label.input-box__image{:for => "message_image"}
+                %i.fa.fa-image
+                  \::before
+                %input#message_image.input-box__image__file{:name => "message[image]", :type => "file"}/
+            %input.submit-btn{"data-disable-with" => "Send", :name => "commit", :type => "submit", :value => "Send"}/
