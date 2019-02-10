@@ -54,17 +54,17 @@ a {
     display: flex;
     align-items: center;
     padding: 0 20px;
-  }
-  .side-header__box {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    font-weight: bold;
-  }
-  .side-header__box__menu {
-    display: flex;
-    li {
-      margin-left: 0.3rem;
+    &__box {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-weight: bold;
+    }
+    &__box__menu {
+      display: flex;
+      li {
+        margin-left: 0.3rem;
+      }
     }
   }
   .groups {
@@ -74,13 +74,13 @@ a {
     overflow: scroll;
     .group {
       margin-bottom: 40px;
-    }
-    .group__group-name {
-      font-size: 15px;
-      margin-bottom: 5px;
-    }
-    .group__latest-message {
-      font-size: 11px;
+      &__group-name {
+        font-size: 15px;
+        margin-bottom: 5px;
+      }
+      &__latest-message {
+        font-size: 11px;
+      }
     }
   }
 }
@@ -97,27 +97,27 @@ a {
     a {
       color: #38aef0;
     }
-  }
-  .main-header__left-box {
-    margin-top: 35px;
-  }
-  .main-header__left-box__current-group {
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 15px;
-  }
-  .main-header__left-box__member-list {
-    display: flex;
-    font-size: 12px;
-    color: #999999;
-  }
-  .main-header__edit-btn {
-    height: 40px;
-    line-height: 40px;
-    padding: 0 20px;
-    margin-top: 30px;
-    border: solid 1px #38aef0;
-  }
+    &__left-box {
+      margin-top: 35px;
+    }
+    &__left-box__current-group {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    &__left-box__member-list {
+      display: flex;
+      font-size: 12px;
+      color: #999999;
+    }
+    &__edit-btn {
+      height: 40px;
+      line-height: 40px;
+      padding: 0 20px;
+      margin-top: 30px;
+      border: solid 1px #38aef0;
+    }
+}
   .messages {
     height: calc(100vh - 190px);
     padding: 46px 40px;
@@ -125,25 +125,25 @@ a {
     overflow: scroll;
     .message {
       padding-bottom: 40px;
-    }
-    .message__text {
-      color: #434a54;
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-    .message__upper-info {
-      display: flex;
-      margin-bottom: 10px;
-    }
-    .message__upper-info__talker {
-      color: #434a54;
-      font-size: 16px;
-      font-weight: bold;
-    }
-    .message__upper-info__data {
-      color: #999999;
-      font-size: 12px;
-      margin-left: 10px;
+      &__text {
+        color: #434a54;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+      &__upper-info {
+        display: flex;
+        margin-bottom: 10px;
+      }
+      &__upper-info__talker {
+        color: #434a54;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      &__upper-info__data {
+        color: #999999;
+        font-size: 12px;
+        margin-left: 10px;
+      }
     }
   }
   .form {
@@ -155,23 +155,23 @@ a {
       .input-box {
         position: relative;
         width: 100%;
-      }
-      .input-box__text {
-        height: 50px;
-        width: 100%;
-        padding: 0 40px 0 10px;
-        color: #434a54;
-        border-style: none;
-      }
-      .input-box__image {
-        font-size: 1.3rem;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        cursor: pointer;
-      }
-      .input-box__image__file {
-        display: none;
+        &__text {
+          height: 50px;
+          width: 100%;
+          padding: 0 40px 0 10px;
+          color: #434a54;
+          border-style: none;
+        }
+        &__image {
+          font-size: 1.3rem;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          cursor: pointer;
+        }
+        &__image__file {
+          display: none;
+        }
       }
       .submit-btn {
         width: 100px;
@@ -193,16 +193,16 @@ a {
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
-.fa-edit:before, .fa-pencil-square-o:before {
-  content: "\f044";
-}
+  &-edit:before, &-pencil-square-o:before {
+    content: "\f044";
+  }
 
-.fa-gear:before, .fa-cog:before {
-  content: "\f013";
-}
+  &-gear:before, &-cog:before {
+    content: "\f013";
+  }
 
-.fa-photo:before, .fa-image:before, .fa-picture-o:before {
-  content: "\f03e";
+  &-photo:before, &-image:before, .fa-picture-o:before {
+    content: "\f03e";
+  }
 }
