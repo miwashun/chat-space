@@ -1,0 +1,20 @@
+.chat-side
+  .side-header
+    .side-header__box
+      %p.side-header__box__user-name= current_user.name
+      %ul.side-header__box__menu
+        %li.side-header__box__menu__edit-user
+          %a{:href => ""}
+            %i.fa.fa-edit
+        %li.side-header__box__menu__new-group
+          = link_to edit_user_path(current_user) do
+            %i.fa.fa-cog
+  .groups
+    %a{:href => ""}
+      .group
+        %p.group__group-name 第一グループ
+        %p.group__latest-message グループメッセージ
+    %a{:href => ""}
+      .group
+        %p.group__group-name 第二グループ
+        %p.group__latest-message まだメッセージがありません
