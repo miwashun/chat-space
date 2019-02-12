@@ -24,5 +24,8 @@
     .chat-group-form__field.clearfix
       .chat-group-form__field--left
       .chat-group-form__field--right
-        / グループ作成機能の追加時はここにcollection_check_boxesの記述を入れてください
+        .check_box
+          = form_for @group do |f|
+            = f.collection_check_boxes(:user_ids, User.all, :id, :name) do |b|
+              = b.label { b.check_box + b.text }
         %input.chat-group-form__action-btn{"data-disable-with" => "Save", name: "commit", type: "submit", value: "Save"}/
