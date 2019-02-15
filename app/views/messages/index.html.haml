@@ -5,16 +5,15 @@
     .main-header
       .main-header__left-box
         %h2.main-header__left-box__current-group{"data-group_id" => "12"}
-          グループ
+          = @group.name
         %ul.main-header__left-box__member-list
           Member：
+          = form_for @group do |f|
+            = f.collection_check_boxes(:user_ids, User.all, :id, :name) do |b|
+              = b.label { b.text }
       = link_to "Edit", "edit", class: "main-header__edit-btn"
     .messages
-      .message{"data-message_id" => ""}
-        .message__upper-info
-          %p.message__upper-info__talker メッセージ主
-          %p.message__upper-info__data 2019/02/09(sat) 15:33:32
-        %p.message__text メッセージテキスト
+      = render partial: 'message', collection: @messages
     .form
       = form_for [@group, @message] do |f|
         = f.text_field :content, class: 'form__message', placeholder: 'type a message'
