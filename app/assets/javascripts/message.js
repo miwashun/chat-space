@@ -1,6 +1,8 @@
 $(function(){
   function buildHTML(message){
-    var html = `<div class="message" data-message_id>
+    var MessageContent = (message.content) ? message.content : ""
+    var MessageImage = (message.image) ? `<img class="form__mask__image" src="${message.image}">` : ""
+    var html = `<div class="message">
                   <div class="message__upper-info">
                     <p class="message__upper-info__talker">
                       ${message.user_name}
@@ -9,11 +11,12 @@ $(function(){
                       ${message.created_at}
                     </p>
                   </div>
-                  <p class="message__text">
-                  </p>
-                  <p class="lower-message__content">
-                   ${message.content}
-                  </p>
+                  <div class="message__text">
+                    <p class="lower-message__content">
+                     ${MessageContent}
+                    </p>
+                     ${MessageImage}
+                  </div>
                 </div>`
                 return html;
   }
@@ -31,13 +34,15 @@ $(function(){
     .done(function(data){
       var html = buildHTML(data);
       $('.messages').append(html)
+      $("#create_message")[0].reset();
       $('.form__message').val('')
-      $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 5000, 'swing');
+      $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 500, 'swing');
       $('.form__submit').prop('disabled', false);
 
     })
     .fail(function(){
       alert('error');
+      $('.form__submit').prop('disabled', false);
     })
   })
 });
