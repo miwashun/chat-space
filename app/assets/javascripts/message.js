@@ -6,11 +6,10 @@ $(function(){
                       ${message.user_name}
                     </p>
                     <p class="message__upper-info__data">
-                      ${message.created_at.strftime("%Y/%m/%d %H:%M")}
+                      ${message.created_at}
                     </p>
                   </div>
                   <p class="message__text">
-                    ${image_tag message.image.url, class: 'form__mask__image' if message.image.present?}
                   </p>
                   <p class="lower-message__content">
                    ${message.content}
@@ -18,6 +17,7 @@ $(function(){
                 </div>`
                 return html;
   }
+
   $('#create_message').on('submit', function(e){
     e.preventDefault();
     var formData = new FormData(this);
@@ -31,7 +31,10 @@ $(function(){
     .done(function(data){
       var html = buildHTML(data);
       $('.messages').append(html)
-      $('.form__message').var('')
+      $('.form__message').val('')
+      $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 5000, 'swing');
+      $('.form__submit').prop('disabled', false);
+
     })
     .fail(function(){
       alert('error');
