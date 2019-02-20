@@ -20,7 +20,6 @@ $(function(){
                 </div>`
                 return html;
   }
-
   $('#create_message').on('submit', function(e){
     e.preventDefault();
     var formData = new FormData(this);
@@ -38,7 +37,6 @@ $(function(){
       $('.form__message').val('')
       $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 500, 'swing');
       $('.form__submit').prop('disabled', false);
-
     })
     .fail(function(){
       alert('error');
