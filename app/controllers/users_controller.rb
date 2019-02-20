@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
 
-  def edit
+  def index
+    @users = User.order('id DESC')
   end
+
+
 
   def update
     if current_user.update(user_params)
@@ -11,6 +14,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def search
+    @users = User.where('name LIKE(?)', "%#{params[:keyword]}%")
+    respond_to do |format|
+      format.html
+      format.json
+   end
+  end
   private
 
   def user_params
