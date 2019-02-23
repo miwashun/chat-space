@@ -24,15 +24,11 @@
       %label.chat-group-form__label{for: "chat_group_チャットメンバー"}
         チャットメンバー
     .chat-group-form__field--right
-      .check_box
-
-
-      #chat-group-users
-        #chat-group-user-id.chat-group-user.clearfix
-          %input{name: "chat_group[user_ids][]", type: "hidden", value: "user-id"}/
+      .chat-group-users.js-add-user
+        .chat-group-user.clearfix.js-chat-member{id: current_user.id}
+          %input{ value: current_user.id, name: "group[user_ids][]", type: "hidden",id: "group_user_ids"}/
           %p.chat-group-user__name
-
-
+            =current_user.name
   .chat-group-form__field.clearfix
     .chat-group-form__field--left
     .chat-group-form__field--right
