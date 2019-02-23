@@ -61,7 +61,6 @@ function addbtn(user_id,user_name) {
     $(this).parent().remove();
   });
   $(".chat-group-users").on('click',".chat-group-user__btn--remove",function(){
-    console.log(this)
     $(this).parent().remove();
   });
 });
