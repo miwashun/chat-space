@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.order('id DESC')
+    @users = User.where('name LIKE(?)', "%#{params[:keyword]}%").where.not(id: current_user.id)
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
 
@@ -14,13 +18,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def search
-    @users = User.where('name', "%#{params[:keyword]}%")
-    respond_to do |format|
-      format.html
-      format.json
-   end
-  end
   private
 
   def user_params
