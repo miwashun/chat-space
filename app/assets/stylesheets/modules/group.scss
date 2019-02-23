@@ -60,7 +60,10 @@
       float: right;
       width: 70%;
     }
-
+    .chat-group-form__search.clearfix {
+      height: 54px;
+      box-sizing: border-box;
+    }
     .chat-group-form__label {
       display: block;
       line-height: 50px;
