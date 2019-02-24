@@ -2,7 +2,12 @@ $(function(){
   setInterval(update, 5000);
     function update(){
       var message_id = $('.message:last').data('message_id');
-      console.log(message_id)
+      $.ajax({
+        url: location.href,
+        type: 'GET',
+        data: {message: {id: message_id}},
+        dataType: 'json'
+      })
   }
 });
 $(function(){
