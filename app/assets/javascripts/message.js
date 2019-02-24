@@ -1,8 +1,15 @@
 $(function(){
+  setInterval(update, 5000);
+    function update(){
+      var message_id = $('.message:last').data('message_id');
+      console.log(message_id)
+  }
+});
+$(function(){
   function buildHTML(message){
     var MessageContent = (message.content) ? message.content : ""
     var MessageImage = (message.image) ? `<img class="form__mask__image" src="${message.image}">` : ""
-    var html = `<div class="message">
+    var html = `<div class="message" data-message_id="${message.id}">
                   <div class="message__upper-info">
                     <p class="message__upper-info__talker">
                       ${message.user_name}
@@ -28,7 +35,7 @@ $(function(){
       data: formData,
       dataType: 'json',
       processData: false,
-      contentType:false
+      contentType: false
     })
     .done(function(data){
       var html = buildHTML(data);
