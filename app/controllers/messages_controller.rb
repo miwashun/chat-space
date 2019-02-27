@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
     @messages = @group.messages.includes(:user)
     respond_to do |format|
       format.html
-      format.json { @new_message = Message.where('id > ?', params[:message][:id]) }
+      format.json { @new_message = Message.where('id > ?', params[:id]) }
     end
   end
 
@@ -16,9 +16,11 @@ class MessagesController < ApplicationController
       respond_to do |format|
         format.json
       end
+
     else
+      @messages = @group.messages.includes(:user)
       flash.now[:alert] = 'メッセージを入力してください'
-      render :index
+      render status: 500
     end
   end
 
