@@ -1,16 +1,4 @@
-$(function(){
-  setInterval(update, 5000);
-    function update(){
-      var message_id = $('.message:last').data('message_id');
-      $.ajax({
-        url: location.href,
-        type: 'GET',
-        data: {message: {id: message_id}},
-        dataType: 'json'
-      })
-  }
-});
-$(function(){
+$(document).on('turbolinks:load', function() {
   function buildHTML(message){
     var MessageContent = (message.content) ? message.content : ""
     var MessageImage = (message.image) ? `<img class="form__mask__image" src="${message.image}">` : ""
@@ -35,23 +23,52 @@ $(function(){
   $('#create_message').on('submit', function(e){
     e.preventDefault();
     var formData = new FormData(this);
-    $.ajax({
-      type: "POST",
-      data: formData,
-      dataType: 'json',
-      processData: false,
-      contentType: false
-    })
-    .done(function(data){
-      var html = buildHTML(data);
-      $('.messages').append(html)
-      $("#create_message")[0].reset();
-      $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 500, 'swing');
-      $('.form__submit').prop('disabled', false);
-    })
-    .fail(function(){
-      alert('error');
-      $('.form__submit').prop('disabled', false);
-    })
+      $.ajax({
+        url: location.href,
+        type: "POST",
+        data: formData,
+        dataType: 'json',
+        processData: false,
+        contentType: false
+      })
+        .done(function(data){
+          var html = buildHTML(data);
+          $('.messages').append(html)
+          $("#create_message")[0].reset();
+          $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 500, 'swing');
+          $('.form__submit').prop('disabled', false);
+        })
+        .fail(function(){
+          alert('非同期通信エラー');
+          $('.form__submit').prop('disabled', false);
+        })
+    return false
   })
+  $(function(){
+    setInterval(update, 5000);
+      function update(){
+        var message_id = $('.message:last').data('message_id');
+        $.ajax({
+          url: location.href,
+          type: 'GET',
+          data: {id: message_id},
+          dataType: 'json'
+        })
+          .done(function(data){
+            if (data.count !== 0){
+              data.forEach(function(message){
+                var html = buildHTML(message);
+                $('.messages').append(html)
+                $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 500, 'swing');
+              });
+            }else{
+              clearInterval();
+            }
+          })
+          .fail(function(){
+            alert('自動更新エラー');
+            $('.form__submit').prop('disabled', false);
+          })
+    };
+  });
 });
