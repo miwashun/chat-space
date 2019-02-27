@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function() {
-    var messages = '.messages'
+  messages = $('.messages')
+  abled = $('.form__submit').prop('disabled', false);
   function buildHTML(message){
     var MessageContent = (message.content) ? message.content : ""
     var MessageImage = (message.image) ? `<img class="form__mask__image" src="${message.image}">` : ""
@@ -34,14 +35,14 @@ $(document).on('turbolinks:load', function() {
       })
         .done(function(data){
           var html = buildHTML(data);
-          $(messages).append(html)
+          messages.append(html)
           $("#create_message")[0].reset();
-          $(messages).animate({scrollTop: $(messages)[0].scrollHeight}, 500, 'swing');
-          $('.form__submit').prop('disabled', false);
+          messages.animate({scrollTop: messages[0].scrollHeight}, 500, 'swing');
+          abled
         })
         .fail(function(){
           alert('メッセージが入っていません！');
-          $('.form__submit').prop('disabled', false);
+          abled
         })
     return false
   })
@@ -58,13 +59,13 @@ $(document).on('turbolinks:load', function() {
           .done(function(data){
               data.forEach(function(message){
                 var html = buildHTML(message);
-                $(messages).append(html)
-                $(messages).animate({scrollTop: $(messages)[0].scrollHeight}, 500, 'swing');
+                messages.append(html)
+                messages.animate({scrollTop: messages[0].scrollHeight}, 500, 'swing');
               });
           })
           .fail(function(){
             alert('自動更新エラー');
-            $('.form__submit').prop('disabled', false);
+            abled
           })
     };
   });
