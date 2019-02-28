@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(function() {
   messages = $('.messages')
   abled = $('.form__submit').prop('disabled', false);
   function buildHTML(message){
@@ -46,27 +46,4 @@ $(document).on('turbolinks:load', function() {
         })
     return false
   })
-  $(function(){
-    setInterval(update, 5000);
-      function update(){
-        var message_id = $('.message:last').data('message_id');
-        $.ajax({
-          url: location.href,
-          type: 'GET',
-          data: {id: message_id},
-          dataType: 'json'
-        })
-          .done(function(data){
-              data.forEach(function(message){
-                var html = buildHTML(message);
-                messages.append(html)
-                messages.animate({scrollTop: messages[0].scrollHeight}, 500, 'swing');
-              });
-          })
-          .fail(function(){
-            alert('自動更新エラー');
-            abled
-          })
-    };
-  });
 });

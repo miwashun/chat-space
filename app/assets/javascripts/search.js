@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(function() {
 var search_list = $("#user-search-result");
 function appendUser(user) {
   var html = `<div class="chat-group-user clearfix">
@@ -35,7 +35,7 @@ function addbtn(user_id,user_name) {
         dataType: 'json'
       })
       .done(function(users) {
-        $("#user-search-result").empty();
+        search_list.empty();
         if (users.length !== 0) {
           users.forEach(function(user){
             appendUser(user);
@@ -50,10 +50,10 @@ function addbtn(user_id,user_name) {
       })
     }
     else{
-      $("#user-search-result").empty();
+      search_list.empty();
     }
   });
-  $("#user-search-result").on('click',".chat-group-user__btn--add",function(){
+  search_list.on('click',".chat-group-user__btn--add",function(){
     var id = $(this).attr('data-user-id');
     var name = $(this).attr('data-user-name');
     addbtn(id,name)
