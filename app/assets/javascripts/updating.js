@@ -22,28 +22,28 @@ $(function() {
                 </div>`
                 return html;
   }
-  $('#create_message').on('submit', function(e){
-    e.preventDefault();
-    var formData = new FormData(this);
-      $.ajax({
-        url: location.href,
-        type: "POST",
-        data: formData,
-        dataType: 'json',
-        processData: false,
-        contentType: false
-      })
-        .done(function(data){
-          var html = buildHTML(data);
-          messages.append(html)
-          $("#create_message")[0].reset();
-          messages.animate({scrollTop: messages[0].scrollHeight}, 500, 'swing');
-          abled
+    if (document.URL.match(/messages/)){
+      setInterval(update, 5000);
+      function update(){
+        var message_id = $('.message:last').data('message_id');
+        $.ajax({
+          url: location.href,
+          type: 'GET',
+          data: {id: message_id},
+          dataType: 'json'
         })
-        .fail(function(){
-          alert('メッセージが入っていません！');
-          abled
-        })
-    return false
-  })
-});
+          .done(function(data){
+            data.forEach(function(message){
+              var html = buildHTML(message);
+              messages.append(html)
+              messages.animate({scrollTop: messages[0].scrollHeight}, 500, 'swing');
+            });
+          })
+          .fail(function(){
+            alert('自動更新が出来ていません。');
+            abled
+          })
+      };
+    }
+  });
+
