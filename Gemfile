@@ -79,3 +79,5 @@ group :production do
   gem 'unicorn'
 end
 
+gem 'draper'
+
